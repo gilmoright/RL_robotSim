@@ -15,6 +15,9 @@ from ray.tune.schedulers import create_scheduler
 from ray.rllib.utils.deprecation import deprecation_warning
 from ray.rllib.utils.framework import try_import_tf, try_import_torch
 
+import MyMisc
+import MyModel
+
 try:
     class_name = get_ipython().__class__.__name__
     IS_NOTEBOOK = True if "Terminal" not in class_name else False

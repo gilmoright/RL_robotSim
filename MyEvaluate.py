@@ -9,7 +9,6 @@ import json
 import os
 from pathlib import Path
 import shelve
-
 import ray
 import ray.cloudpickle as cloudpickle
 from ray.rllib.agents.registry import get_trainer_class
@@ -22,6 +21,9 @@ from ray.rllib.utils.deprecation import deprecation_warning
 from ray.rllib.utils.spaces.space_utils import flatten_to_single_ndarray
 from ray.tune.utils import merge_dicts
 from ray.tune.registry import get_trainable_cls, _global_registry, ENV_CREATOR
+
+import MyMisc
+import MyModel
 
 EXAMPLE_USAGE = """
 Example usage via RLlib CLI:
