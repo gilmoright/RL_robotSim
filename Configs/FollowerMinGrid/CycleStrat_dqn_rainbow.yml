@@ -1,0 +1,658 @@
+Vanilla:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 1
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+
+2kTSI:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 400
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 2000
+        num_atoms: 1
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+
+10kTSI:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 400
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 10000
+        num_atoms: 1
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+
+3step:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 1
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 3
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+        
+5step:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 1
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 5
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+
+10step:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 1
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 10
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+C10:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 10
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+
+C51:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 51
+        #noisy: True
+        #dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+
+Duel:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 1
+        #noisy: True
+        dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+        
+C51_duel:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 51
+        #noisy: True
+        dueling: True
+        #double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+
+Double:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 1
+        #noisy: True
+        #dueling: True
+        double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
+        
+C51_double:
+    env: mini-grid
+    run: DQN
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerMinGrid/CycleStrat/batch_768
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 200
+        episode_reward_mean: 50
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: MiniGrid-FollowTheLeader-cycle_all_strats-30x30-v0
+            framestack: 4
+        log_level: INFO
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 4000
+        num_atoms: 51
+        #noisy: True
+        #dueling: True
+        double_q: True
+        # === Model ===
+        n_step: 1
+        num_workers: 2
+        model: {
+            #custom_model: MyFCNet,
+            conv_filters: [[128, [4, 4], 1], [64, [3, 3], 1], [256, [28, 7], 1]], # last should have same output shape as the input data
+            fcnet_hiddens: [64, 64],
+            fcnet_activation: relu,
+            no_final_linear: True
+        }
+        gamma: 0.99
+        lr: .001
+        learning_starts: 1000
+        replay_buffer_config:
+            capacity: 50000
+        batch_mode: complete_episodes
+        #rollout_fragment_length: 12
+        train_batch_size: 768
+        exploration_config:
+          initial_epsilon: 1
+          epsilon_timesteps: 10000
+          final_epsilon: .01
+        # === Optimization ===
+        #learning_starts: 500
+        #rollout_fragment_length: 1
+
+        # === Replay buffer ===
+        #buffer_size: 10000
+        #prioritized_replay: True
+        #prioritized_replay_alpha: 0.6
+        #prioritized_replay_beta: 0.4
+        #prioritized_replay_eps: 0.000001
+        #clip_rewards: False
