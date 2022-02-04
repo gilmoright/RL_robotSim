@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+import sys
+import os
+os.environ["SDL_VIDEODRIVER"] = "dummy"
+sys.path.append("/s/ls4/users/grartem/RL_robots/continuous-grid-arctic/")
+import follow_the_leader_continuous_env
 
 import gym
 from collections import deque
@@ -137,27 +142,28 @@ class MyFrameStack(ObservationWrapper):
         lz4_compress (bool): use lz4 to compress the frames internally
     """
 
-    def __init__(self, env, num_stack, lz4_compress=False):
+    def __init__(self, env, framestack, lz4_compress=False):
         super().__init__(env)
-        self.num_stack = num_stack
+        self.framestack = framestack
         self.lz4_compress = lz4_compress
 
-        self.frames = deque(maxlen=num_stack)
+        self.frames = deque(maxlen=framestack)
 
-        low = np.repeat(self.observation_space.low[...], num_stack, axis=0)
-        high = np.repeat(
-            self.observation_space.high[...], num_stack, axis=0
+        low = np.tile(self.observation_space.low[...], framestack)
+        high = np.tile(
+            self.observation_space.high[...], framestack
         )
         self.observation_space = Box(
             low=low, high=high, dtype=self.observation_space.dtype
         )
 
     def observation(self):
-        assert len(self.frames) == self.num_stack, (len(self.frames), self.num_stack)
+        assert len(self.frames) == self.framestack, (len(self.frames), self.framestack)
         observes = np.concatenate(self.frames)
         #observes[:,:,0] = observes[:,:,0] / 11
         #observes[:,:,1] = observes[:,:,1] / 6
         #observes[:,:,2] = observes[:,:,2] / 3
+        assert not np.isnan(observes).any()
         return observes
         #return gym.wrappers.frame_stack.LazyFrames(observes, self.lz4_compress)
 
@@ -168,11 +174,11 @@ class MyFrameStack(ObservationWrapper):
 
     def reset(self, **kwargs):
         observation = self.env.reset(**kwargs)
-        [self.frames.append(observation) for _ in range(self.num_stack)]
+        [self.frames.append(observation) for _ in range(self.framestack)]
         return self.observation()
 
 
-def env_maker(config):
+def minigrid_env_maker(config):
     name = config["name"]  # .get("name", "MiniGrid-Empty-5x5-v0")
     framestack = config.get("framestack", 4)
     env = gym.make(name)
@@ -187,4 +193,111 @@ def env_maker(config):
     #    framestack=framestack)
     return env
 
-register_env("mini-grid", env_maker)
+register_env("mini-grid", minigrid_env_maker)
+
+class ContinuousObserveModifier_v0(ObservationWrapper):
+    
+    def __init__(self, env, lz4_compress=False):
+        super().__init__(env)
+        self.prev_obs = None
+        self.max_diag = np.sqrt(np.power(self.DISPLAY_WIDTH,2)+np.power(self.DISPLAY_HEIGHT, 2))
+        """
+        self.observation_space = Box(np.array([-self.DISPLAY_WIDTH,-self.DISPLAY_HEIGHT,
+                                      -self.leader.max_speed,
+                                      -360,
+                                      -self.leader.max_rotation_speed,
+                                      -self.DISPLAY_WIDTH,-self.DISPLAY_HEIGHT,
+                                      -self.follower.max_speed,
+                                      -360,
+                                      -self.follower.max_rotation_speed,
+                                      -self.DISPLAY_WIDTH,-self.DISPLAY_HEIGHT,
+                                      -self.leader.max_speed -self.follower.max_speed,
+                                      -720,
+                                      -self.DISPLAY_WIDTH-self.DISPLAY_HEIGHT,
+                                      -self.max_diag,-self.max_diag
+                                      ], dtype=np.float32),
+                             np.array([self.DISPLAY_WIDTH,self.DISPLAY_HEIGHT,
+                                      self.leader.max_speed,
+                                      360,
+                                      self.leader.max_rotation_speed,
+                                      self.DISPLAY_WIDTH, self.DISPLAY_HEIGHT,
+                                      self.follower.max_speed,
+                                      360,
+                                      self.follower.max_rotation_speed,
+                                      self.DISPLAY_WIDTH, self.DISPLAY_HEIGHT,
+                                      self.leader.max_speed +self.follower.max_speed,
+                                      720,
+                                      +self.DISPLAY_WIDTH+self.DISPLAY_HEIGHT,
+                                      self.max_diag, self.max_diag
+                                      ], dtype=np.float32
+                                      ))
+        """
+        self.observation_space = Box(np.array([-1,-1,
+                                      -1,
+                                      -1,
+                                      -1,
+                                      -1,-1,
+                                      -1,
+                                      -1,
+                                      -1,
+                                      -1,-1,
+                                      -1,
+                                      -1,
+                                      -1,
+                                      -1,-1
+                                      ], dtype=np.float32),
+                             np.array([1,1,
+                                      1,
+                                      1,
+                                      1,
+                                      1, 1,
+                                      1,
+                                      1,
+                                      1,
+                                      1, 1,
+                                      1,
+                                      1,
+                                      1,
+                                      1, 1
+                                      ], dtype=np.float32
+                                      ))
+
+    def observation(self, obs):
+        # TODO:
+        # не обязательно делить на максимальное значение, можно на максимально допустимое.
+        # так как я разницу между позициями даю, лидер или агент не могут на целый экран прыгнуть. 
+        obs[0] /= self.DISPLAY_WIDTH
+        obs[1] /= self.DISPLAY_HEIGHT
+        obs[2] /= self.leader.max_speed
+        obs[3] /= 360
+        obs[4] /= self.leader.max_rotation_speed
+        obs[5] /= self.DISPLAY_WIDTH
+        obs[6] /= self.DISPLAY_HEIGHT
+        obs[7] /= self.follower.max_speed
+        obs[8] /= 360
+        obs[9] /= self.follower.max_rotation_speed
+
+        # change leader absolute pos, speed, direction to relative
+        relativePositions = obs[0:4] - obs[5:9]
+        distance = np.linalg.norm(relativePositions[:2])
+        distanceFromBorders = [distance-(obs[-3]/self.max_diag ), (obs[-2]/self.max_diag) - distance]
+        obs = obs[:-3]
+        
+        
+        if self.prev_obs is None:
+            self.prev_obs = obs
+        
+        
+        obs = np.concatenate([obs - self.prev_obs, relativePositions, [distance], distanceFromBorders])
+        #print("OBSS", obs)
+        return np.clip(obs, -1, 1)
+
+def continuous_env_maker(config):
+    name = config["name"]  # .get("name", "MiniGrid-Empty-5x5-v0")
+    framestack = config.get("framestack", 4)
+    env = gym.make(name)
+    env = ContinuousObserveModifier_v0(env)
+    env = MyFrameStack(env, framestack)
+    return env
+
+register_env("continuous-grid", continuous_env_maker)
