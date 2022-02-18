@@ -1,0 +1,65 @@
+v0:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/TD3/tests
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 500
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            framestack: 500
+            base_env_config:
+                warm_start: 4
+            wrappers: ['MyFrameStack', 'ContinuousObserveModifier_v0']
+        log_level: WARNING
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 10240
+        # === Model ===
+        num_workers: 2
+        model:
+            fcnet_hiddens: [256, 256, 256]
+            fcnet_activation: relu
+            use_lstm: True
+            lstm_use_prev_action: True
+            lstm_use_prev_reward: True
+            max_seq_len: 500
+        gamma: 0.99
+        lr: .001
+        rollout_fragment_length: 5000
+        train_batch_size: 1024
+v0v1:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/TD3/tests
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 500
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            framestack: 500
+            base_env_config:
+                warm_start: 4
+                reward_config: /s/ls4/users/grartem/RL_robots/continuous-grid-arctic/Configs/noPenalty.txt
+            wrappers: ['MyFrameStack', 'ContinuousObserveModifier_v0']
+        log_level: WARNING
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 10240
+        # === Model ===
+        num_workers: 2
+        model:
+            fcnet_hiddens: [256, 256, 256]
+            fcnet_activation: relu
+            use_lstm: True
+            lstm_use_prev_action: True
+            lstm_use_prev_reward: True
+            max_seq_len: 500
+        gamma: 0.99
+        lr: .001
+        rollout_fragment_length: 5000
+        train_batch_size: 1024

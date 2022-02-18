@@ -1,4 +1,4 @@
-v0:
+v0v0:
     env: continuous-grid
     run: PPO
     local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
@@ -9,18 +9,140 @@ v0:
         # Works for both torch and tf.
         env_config:
             name: Test-Cont-Env-Auto-v0
-            framestack: 20
+            framestack: 100
+            base_env_config:
+                warm_start: 4
+                add_obstacles: False
+            wrappers: ['LeaderTrajectory_v0']
+            radar_sectors_number: 90
         log_level: WARNING
         framework: torch
         num_gpus: 1
-        timesteps_per_iteration: 20000
+        timesteps_per_iteration: 1000
         # === Model ===
         num_workers: 2
         model:
-            fcnet_hiddens: [256, 256, 256]
+            fcnet_hiddens: [4, 4]
             fcnet_activation: relu
+            use_lstm: True
+            lstm_use_prev_action: True
+            lstm_use_prev_reward: True
+            max_seq_len: 100
         gamma: 0.99
-        lr: .0001
-        train_batch_size: 20000
-        sgd_minibatch_size: 1024
-        num_sgd_iter: 5
+        lr: .001
+        batch_mode: complete_episodes
+        train_batch_size: 1000
+        sgd_minibatch_size: 1000
+        num_sgd_iter: 10
+
+v0v1:
+    env: continuous-grid
+    run: PPO
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 500
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            framestack: 100
+            base_env_config:
+                warm_start: 4
+                add_obstacles: False
+            wrappers: ['LeaderTrajectory_v0']
+            radar_sectors_number: 90
+        log_level: WARNING
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 1000
+        # === Model ===
+        num_workers: 2
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+            use_lstm: True
+            lstm_use_prev_action: True
+            lstm_use_prev_reward: True
+            max_seq_len: 100
+        gamma: 0.99
+        lr: .001
+        batch_mode: complete_episodes
+        train_batch_size: 1000
+        sgd_minibatch_size: 1000
+        num_sgd_iter: 10
+
+v0v2:
+    env: continuous-grid
+    run: PPO
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 500
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            framestack: 100
+            base_env_config:
+                warm_start: 4
+                add_obstacles: False
+            wrappers: ['LeaderTrajectory_v0']
+            radar_sectors_number: 90
+        log_level: WARNING
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 1000
+        # === Model ===
+        num_workers: 2
+        model:
+            fcnet_hiddens: [16, 16]
+            fcnet_activation: relu
+            use_lstm: True
+            lstm_use_prev_action: True
+            lstm_use_prev_reward: True
+            max_seq_len: 100
+        gamma: 0.99
+        lr: .001
+        batch_mode: complete_episodes
+        train_batch_size: 1000
+        sgd_minibatch_size: 1000
+        num_sgd_iter: 10
+
+v0v3:
+    env: continuous-grid
+    run: PPO
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 500
+    config:
+        # Works for both torch and tf.
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            framestack: 100
+            base_env_config:
+                warm_start: 4
+                add_obstacles: False
+            wrappers: ['LeaderTrajectory_v0']
+            radar_sectors_number: 90
+        log_level: WARNING
+        framework: torch
+        num_gpus: 1
+        timesteps_per_iteration: 1000
+        # === Model ===
+        num_workers: 2
+        model:
+            fcnet_hiddens: [32, 32]
+            fcnet_activation: relu
+            use_lstm: True
+            lstm_use_prev_action: True
+            lstm_use_prev_reward: True
+            max_seq_len: 100
+        gamma: 0.99
+        lr: .001
+        batch_mode: complete_episodes
+        train_batch_size: 1000
+        sgd_minibatch_size: 1000
+        num_sgd_iter: 10
+
