@@ -1,26 +1,44 @@
-v0v0:
+lrTune_v0v2:
     env: continuous-grid
     run: PPO
-    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/lrTune
     checkpoint_freq: 10
     stop:
-        training_iteration: 500
+        training_iteration: 1000
     config:
         # Works for both torch and tf.
         env_config:
             name: Test-Cont-Env-Auto-v0
             framestack: 100
             base_env_config:
-                warm_start: 4
+                warm_start: 1
+                max_steps: 5000
                 add_obstacles: False
-            wrappers: ['LeaderTrajectory_v0']
+                framerate: 5000
+                early_stopping:
+                    max_distance_coef: 1.2
+                    low_reward: -100
+                follower_sensors:
+                    LeaderPositionsTracker:
+                        sensor_name: LeaderPositionsTracker
+                        eat_close_points: True
+                        saving_period: 8
+                    LeaderTrackDetector_vector:
+                        sensor_name: LeaderTrackDetector_vector
+                        position_sequence_length: 10
+                    LeaderTrackDetector_radar:
+                        sensor_name: LeaderTrackDetector_radar
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        detectable_positions: near
+            wrappers: ['ContinuousObserveModifier_v0']
             radar_sectors_number: 90
         log_level: WARNING
         framework: torch
         num_gpus: 1
-        timesteps_per_iteration: 1000
+        timesteps_per_iteration: 5000
         # === Model ===
-        num_workers: 2
+        num_workers: 4
         model:
             fcnet_hiddens: [4, 4]
             fcnet_activation: relu
@@ -28,121 +46,78 @@ v0v0:
             lstm_use_prev_action: True
             lstm_use_prev_reward: True
             max_seq_len: 100
+            #lstm_cell_size: 4
         gamma: 0.99
-        lr: .001
+        lr: .0001
         batch_mode: complete_episodes
-        train_batch_size: 1000
-        sgd_minibatch_size: 1000
-        num_sgd_iter: 10
+        train_batch_size: 5000
+        sgd_minibatch_size: 2500
+        num_sgd_iter: 20
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 100
+            stddev: 0.1
 
-v0v1:
+lrTune_v0v3:
     env: continuous-grid
     run: PPO
-    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/lrTune
     checkpoint_freq: 10
     stop:
-        training_iteration: 500
+        training_iteration: 1000
     config:
         # Works for both torch and tf.
         env_config:
             name: Test-Cont-Env-Auto-v0
             framestack: 100
             base_env_config:
-                warm_start: 4
+                warm_start: 1
+                max_steps: 5000
                 add_obstacles: False
-            wrappers: ['LeaderTrajectory_v0']
+                framerate: 5000
+                early_stopping:
+                    max_distance_coef: 1.2
+                    low_reward: -100
+                follower_sensors:
+                    LeaderPositionsTracker:
+                        sensor_name: LeaderPositionsTracker
+                        eat_close_points: True
+                        saving_period: 8
+                    LeaderTrackDetector_vector:
+                        sensor_name: LeaderTrackDetector_vector
+                        position_sequence_length: 10
+                    LeaderTrackDetector_radar:
+                        sensor_name: LeaderTrackDetector_radar
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        detectable_positions: near
+            wrappers: ['ContinuousObserveModifier_v0']
             radar_sectors_number: 90
         log_level: WARNING
         framework: torch
         num_gpus: 1
-        timesteps_per_iteration: 1000
+        timesteps_per_iteration: 5000
         # === Model ===
-        num_workers: 2
+        num_workers: 4
         model:
-            fcnet_hiddens: [8, 8]
+            fcnet_hiddens: [4, 4]
             fcnet_activation: relu
             use_lstm: True
             lstm_use_prev_action: True
             lstm_use_prev_reward: True
             max_seq_len: 100
+            #lstm_cell_size: 4
         gamma: 0.99
-        lr: .001
+        lr: .00005
         batch_mode: complete_episodes
-        train_batch_size: 1000
-        sgd_minibatch_size: 1000
-        num_sgd_iter: 10
-
-v0v2:
-    env: continuous-grid
-    run: PPO
-    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
-    checkpoint_freq: 10
-    stop:
-        training_iteration: 500
-    config:
-        # Works for both torch and tf.
-        env_config:
-            name: Test-Cont-Env-Auto-v0
-            framestack: 100
-            base_env_config:
-                warm_start: 4
-                add_obstacles: False
-            wrappers: ['LeaderTrajectory_v0']
-            radar_sectors_number: 90
-        log_level: WARNING
-        framework: torch
-        num_gpus: 1
-        timesteps_per_iteration: 1000
-        # === Model ===
-        num_workers: 2
-        model:
-            fcnet_hiddens: [16, 16]
-            fcnet_activation: relu
-            use_lstm: True
-            lstm_use_prev_action: True
-            lstm_use_prev_reward: True
-            max_seq_len: 100
-        gamma: 0.99
-        lr: .001
-        batch_mode: complete_episodes
-        train_batch_size: 1000
-        sgd_minibatch_size: 1000
-        num_sgd_iter: 10
-
-v0v3:
-    env: continuous-grid
-    run: PPO
-    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/PPO/tests
-    checkpoint_freq: 10
-    stop:
-        training_iteration: 500
-    config:
-        # Works for both torch and tf.
-        env_config:
-            name: Test-Cont-Env-Auto-v0
-            framestack: 100
-            base_env_config:
-                warm_start: 4
-                add_obstacles: False
-            wrappers: ['LeaderTrajectory_v0']
-            radar_sectors_number: 90
-        log_level: WARNING
-        framework: torch
-        num_gpus: 1
-        timesteps_per_iteration: 1000
-        # === Model ===
-        num_workers: 2
-        model:
-            fcnet_hiddens: [32, 32]
-            fcnet_activation: relu
-            use_lstm: True
-            lstm_use_prev_action: True
-            lstm_use_prev_reward: True
-            max_seq_len: 100
-        gamma: 0.99
-        lr: .001
-        batch_mode: complete_episodes
-        train_batch_size: 1000
-        sgd_minibatch_size: 1000
-        num_sgd_iter: 10
-
+        train_batch_size: 5000
+        sgd_minibatch_size: 2500
+        num_sgd_iter: 20
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 100
+            stddev: 0.1

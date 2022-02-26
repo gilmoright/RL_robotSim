@@ -5,7 +5,7 @@
 #SBATCH -e /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/Continuous_ppo_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
 #SBATCH -n 8
-#SBATCH --gres=gpu:k80:4
+#SBATCH --gres=gpu:k80:2
 
 export HOME=/s/ls4/users/grartem
 export PATH=$HOME/anaconda3/envs/rl_robots/bin:$PATH
