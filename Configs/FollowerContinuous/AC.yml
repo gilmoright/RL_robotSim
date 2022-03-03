@@ -1,10 +1,10 @@
 v0:
     env: continuous-grid
-    run: TD3
-    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/
+    run: A3C
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/A3C/
     checkpoint_freq: 10
     stop:
-        training_iteration: 500
+        training_iteration: 2000
     config:
         num_gpus: 1
         timesteps_per_iteration: 5000
@@ -45,7 +45,12 @@ v0:
         model:
             fcnet_hiddens: [8, 8]
             fcnet_activation: relu
-        # === Traing ===
+            use_lstm: True
+            lstm_use_prev_action: True
+            lstm_use_prev_reward: True
+            max_seq_len: 100
+            lstm_cell_size: 8
+        # === Learning settings ===
         gamma: 0.99
         lr: .00001
         batch_mode: complete_episodes
@@ -57,3 +62,4 @@ v0:
             random_timesteps: 10
             stddev: 0.1
 
+    
