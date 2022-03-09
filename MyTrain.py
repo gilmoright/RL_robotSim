@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import yaml
 
+import pyhocon
 import ray
 from ray.tune.config_parser import make_parser
 from ray.tune.progress_reporter import CLIReporter, JupyterNotebookReporter
@@ -133,7 +134,12 @@ def create_parser(parser_creator=None):
         type=str,
         help="If specified, use config options from this file. Note that this "
         "overrides any trial-specific options set via flags above.")
-
+    parser.add_argument(
+        "--experiments",
+        default=[],
+        type=str,
+        nargs="*",
+        help="List of experiments to chose from config_file")
     # Obsolete: Use --framework=torch|tf2|tfe instead!
     parser.add_argument(
         "--torch",
@@ -149,8 +155,16 @@ def create_parser(parser_creator=None):
 
 def run(args, parser):
     if args.config_file:
-        with open(args.config_file) as f:
-            experiments = yaml.safe_load(f)
+        if ".conf" in args.config_file:
+            configFileContent = pyhocon.ConfigFactory.parse_file(args.config_file)
+            experiments = {}
+            print(args.experiments)
+            for expName in args.experiments:
+                print(expName)
+                experiments[expName] = configFileContent[expName].as_plain_ordered_dict()
+        else:
+            with open(args.config_file) as f:
+                experiments = yaml.safe_load(f)
     else:
         # Note: keep this in sync with tune/config_parser.py
         experiments = {
