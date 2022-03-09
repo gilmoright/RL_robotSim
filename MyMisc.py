@@ -4,7 +4,7 @@ import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 sys.path.append("/s/ls4/users/grartem/RL_robots/continuous-grid-arctic/")
 import follow_the_leader_continuous_env
-from utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, LeaderTrajectory_v0
+from utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_v1, LeaderTrajectory_v0
 
 import gym
 from collections import deque
@@ -146,6 +146,8 @@ def continuous_env_maker(config):
     assert not (ContinuousObserveModifier_v0 in config["wrappers"] and LeaderTrajectory_v0 in config["wrappers"])
     if 'ContinuousObserveModifier_v0' in config["wrappers"]:
         env = ContinuousObserveModifier_v0(env)
+    if 'ContinuousObserveModifier_v1' in config["wrappers"]:
+        env = ContinuousObserveModifier_v1(env)
     elif "LeaderTrajectory_v0" in config["wrappers"]:
         env = LeaderTrajectory_v0(env, framestack, config.get('radar_sectors_number', 180))
     if 'MyFrameStack' in config['wrappers']:

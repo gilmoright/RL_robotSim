@@ -1,17 +1,20 @@
-v0:
+v7_noNorm:
     env: continuous-grid
     run: TD3
-    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst/TD3/explore
     checkpoint_freq: 10
     stop:
-        training_iteration: 500
+        training_iteration: 2000
     config:
         num_gpus: 1
         timesteps_per_iteration: 5000
         num_workers: 4
         log_level: WARNING
         framework: torch
+        twin_q: False
+        n_step: 1
         # === Env config ===
+        normalize_actions: False
         env_config:
             name: Test-Cont-Env-Auto-v0
             base_env_config:
@@ -20,7 +23,7 @@ v0:
                 frames_per_step: 5
                 add_obstacles: False
                 framerate: 5000
-                constant_follower_speed: True
+                constant_follower_speed: False
                 early_stopping:
                     max_distance_coef: 1.3
                     low_reward: -200
@@ -54,6 +57,6 @@ v0:
         explore: True
         exploration_config:
             type: GaussianNoise
-            random_timesteps: 10
-            stddev: 0.1
-
+            random_timesteps: 20000    
+            stddev: 0.5
+            scale_timesteps: 2000000

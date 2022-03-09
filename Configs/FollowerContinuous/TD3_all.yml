@@ -1,0 +1,893 @@
+v0:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: True
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [400, 300]
+        actor_hiddens: [400, 300]
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10
+            stddev: 0.1
+
+# === Explore ===
+v1_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/explore
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000    
+            stddev: 0.5
+            scale_timesteps: 1000000
+v4_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/explore
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: OrnsteinUhlenbeckNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+v5_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/explore
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: OrnsteinUhlenbeckNoise
+            random_timesteps: 50000
+            scale_timesteps: 1000000
+v6_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/explore
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: OrnsteinUhlenbeckNoise
+            random_timesteps: 50000
+            scale_timesteps: 1000000
+            ou_sigma: 0.4
+            ou_theta: 0.3
+
+v7_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/explore
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 20000    
+            stddev: 0.5
+            scale_timesteps: 2000000
+# === Arch Explv1 ===
+
+v3_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/arch_explv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [32, 32]
+        actor_hiddens: [32, 32]
+        model:
+            fcnet_hiddens: [32, 32]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
+v4_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/arch_explv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 1
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [64, 64]
+        actor_hiddens: [64, 64]
+        model:
+            fcnet_hiddens: [64, 64]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
+
+# === Train explv1 ===
+v1_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/train_explv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 5
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [400, 300]
+        actor_hiddens: [400, 300]
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
+
+v2_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/train_explv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: True
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [400, 300]
+        actor_hiddens: [400, 300]
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
+v2v2_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst_constSpeed/TD3/train_explv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: True
+        n_step: 5
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: True
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [400, 300]
+        actor_hiddens: [400, 300]
+        model:
+            fcnet_hiddens: [8, 8]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
+
+# === Arch Explv1 trainv1===
+v4_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst/TD3/arch_explv1_trainv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 5
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: False
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [64, 64]
+        actor_hiddens: [64, 64]
+        model:
+            fcnet_hiddens: [64,64]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
+v5_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst/TD3/arch_explv1_trainv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 5
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: False
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [128, 128]
+        actor_hiddens: [128, 128]
+        model:
+            fcnet_hiddens: [128,128]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
+v6_noNorm:
+    env: continuous-grid
+    run: TD3
+    local_dir: /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst/TD3/arch_explv1_trainv1
+    checkpoint_freq: 10
+    stop:
+        training_iteration: 2000
+    config:
+        num_gpus: 1
+        timesteps_per_iteration: 5000
+        num_workers: 4
+        log_level: WARNING
+        framework: torch
+        twin_q: False
+        n_step: 5
+        # === Env config ===
+        normalize_actions: False
+        env_config:
+            name: Test-Cont-Env-Auto-v0
+            base_env_config:
+                warm_start: 0
+                max_steps: 5000
+                frames_per_step: 5
+                add_obstacles: False
+                framerate: 5000
+                constant_follower_speed: False
+                early_stopping:
+                    max_distance_coef: 1.3
+                    low_reward: -200
+                follower_sensors:
+                    LeaderCorridor_lasers:
+                        sensor_name: LeaderCorridor_lasers
+                    LeaderPositionsTracker:
+                        eat_close_points: True
+                        generate_corridor: True
+                        saving_period: 8
+                        sensor_name: LeaderPositionsTracker
+                    LeaderTrackDetector_radar:
+                        detectable_positions: near
+                        position_sequence_length: 100
+                        radar_sectors_number: 7
+                        sensor_name: LeaderTrackDetector_radar
+                    LeaderTrackDetector_vector:
+                        position_sequence_length: 10
+                        sensor_name: LeaderTrackDetector_vector
+            wrappers: ['ContinuousObserveModifier_v0']
+        # === Model ===
+        critic_hiddens: [256, 256]
+        actor_hiddens: [256, 256]
+        model:
+            fcnet_hiddens: [256,256]
+            fcnet_activation: relu
+        # === Traing ===
+        gamma: 0.99
+        lr: .00001
+        batch_mode: complete_episodes
+        train_batch_size: 5000
+        # === Exploration Settings ===
+        explore: True
+        exploration_config:
+            type: GaussianNoise
+            random_timesteps: 10000
+            scale_timesteps: 1000000
+            stddev: 0.5
