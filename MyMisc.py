@@ -142,10 +142,11 @@ register_env("mini-grid", minigrid_env_maker)
 def continuous_env_maker(config):
     name = config["name"]  # .get("name", "MiniGrid-Empty-5x5-v0")
     framestack = config.get("framestack", 4)
+    action_values_range = config.get("action_values_range", None)
     env = gym.make(name, **config["base_env_config"])
     assert not (ContinuousObserveModifier_v0 in config["wrappers"] and LeaderTrajectory_v0 in config["wrappers"])
     if 'ContinuousObserveModifier_v0' in config["wrappers"]:
-        env = ContinuousObserveModifier_v0(env)
+        env = ContinuousObserveModifier_v0(env, action_values_range)
     if 'ContinuousObserveModifier_v1' in config["wrappers"]:
         env = ContinuousObserveModifier_v1(env)
     elif "LeaderTrajectory_v0" in config["wrappers"]:
