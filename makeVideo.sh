@@ -11,7 +11,7 @@ export HOME=/s/ls4/users/grartem
 export PATH=$HOME/anaconda3/envs/rl_robots/bin:$PATH
 
 export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:$HOME/installation_dists/cudnn-9.0-linux-x64-v7.1.ga/lib64:
-export EXPERIMENT_DIR=/s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/noObst/TD3/arch_explv1_trainv1/v5_noNorm/TD3_continuous-grid_ef101_00001_1_2022-03-08_03-16-24
+export EXPERIMENT_DIR=/s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst/TD3/td3_v0/TD3_continuous-grid_7b319_00000_0_2022-03-09_22-45-32/
 
 python MyEvaluate.py $EXPERIMENT_DIR/checkpoint_000010/checkpoint-10 \
 --run TD3 \
