@@ -2,9 +2,9 @@
 import sys
 import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
-sys.path.append("/s/ls4/users/grartem/RL_robots/continuous-grid-arctic/")
-import follow_the_leader_continuous_env
-from utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_v1, LeaderTrajectory_v0
+sys.path.append("/s/ls4/users/grartem/RL_robots/continuous_grid_arctic")
+import continuous_grid_arctic.follow_the_leader_continuous_env
+from continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_v1, LeaderTrajectory_v0
 
 import gym
 from collections import deque
