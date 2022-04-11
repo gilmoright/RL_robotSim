@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#SBATCH -J a3c
+#SBATCH -J ppo
 #SBATCH -D /s/ls4/users/grartem/RL_robots/RL_robotSim
 #SBATCH -o /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/Continuous_%x_%j.out
 #SBATCH -e /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/Continuous_%x_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
-#SBATCH -n 4
-#SBATCH --gres=gpu:k80:1
-#SBATCH --time=24:00:00
+#SBATCH -n 8
+#SBATCH --gres=gpu:k80:2
+#SBATCH --time=36:00:00
 
 export HOME=/s/ls4/users/grartem
 export PATH=$HOME/anaconda3/envs/rl_robots/bin:$PATH
@@ -16,4 +16,5 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 
 #python MyTrain.py --config-file Configs/FollowerContinuous/TD3.yml
 #python MyTrain.py --config-file Configs/FollowerContinuous/TD3_obst.conf --experiments td3_algov3 td3_algov5 td3_algov6
-python MyTrain.py --config-file Configs/FollowerContinuous/A3C_obstDiscr.conf --experiments a3c_arch6_feats2
+#python MyTrain.py --config-file Configs/FollowerContinuous/A3C_obstDiscr.conf --experiments a3c_arch6 a3c_feats2 a3c_feats1
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_obst.conf --experiments ppo_env4_feats10v7 ppo_env4_feats10v8
