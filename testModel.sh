@@ -16,34 +16,28 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 700
+--checkpoint_number 10
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 710
+--checkpoint_number 20
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 720
+--checkpoint_number 30
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 730
+--checkpoint_number 40
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 740
+--checkpoint_number 50
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 750
+--checkpoint_number 60
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 760
+--checkpoint_number 70
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 770
+--checkpoint_number 80
 python TestModel.py --rlalgo PPO \
 --run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 780
-python TestModel.py --rlalgo PPO \
---run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 790
-python TestModel.py --rlalgo PPO \
---run_dir /s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/obst_dynLSpd_dynFPS/PPO/env4feats10v7_train/ppo_env4feats10v7_train5v2/PPO_continuous-grid_0a7bf_00000_0_2022-04-12_15-49-50/ \
---checkpoint_number 800
+--checkpoint_number 90
