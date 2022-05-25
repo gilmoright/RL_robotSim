@@ -17,7 +17,17 @@ from ray.rllib.agents.ddpg.td3 import TD3Trainer
 
 import MyMisc
 
-RECORD_SEEDS = []
+#TEST_SEEDS = range(100)
+TEST_SEEDS = [1, 4, 5, 7 ,9, 10, 11, 14, 16, 17, 21, 24, 28, 29, 30, 32, 36, 38, 40, 43, 44, 45, 46, 49,
+             53, 58, 59, 60, 62, 63, 64, 65, 66, 70, 72, 73, 76, 82, 84, 85, 87, 88, 89, 90, 91, 92, 94, 95, 96, 97, 98, 99, 100,
+             103, 105, 107, 108, 109, 116,117, 119, 121,124, 127, 129, 131, 132, 138, 139, 140, 141, 146, 149, 150,
+             152, 153, 154, 155, 156, 159, 160, 161, 166, 170, 172, 173, 174, 175, 176, 177, 179, 181, 182, 183, 185, 186,
+             187, 189, 192, 194, 195, 196, 197, 198, 199]
+RECORD_SEEDS = [1, 4, 5, 7 ,9, 10, 11, 14, 16, 17, 21, 24, 28, 29, 30, 32, 36, 38, 40, 43, 44, 45, 46, 49,
+             53, 58, 59, 60, 62, 63, 64, 65, 66, 70, 72, 73, 76, 82, 84, 85, 87, 88, 89, 90, 91, 92, 94, 95, 96, 97, 98, 99, 100,
+             103, 105, 107, 108, 109, 116,117, 119, 121,124, 127, 129, 131, 132, 138, 139, 140, 141, 146, 149, 150,
+             152, 153, 154, 155, 156, 159, 160, 161, 166, 170, 172, 173, 174, 175, 176, 177, 179, 181, 182, 183, 185, 186,
+             187, 189, 192, 194, 195, 196, 197, 198, 199]
 
 if __name__=="__main__":
     import argparse
@@ -32,7 +42,7 @@ if __name__=="__main__":
         "--run_dir",
         default=None,
         type=str,
-        help="path experiment dir with config anc checkpoints")
+        help="path experiment dir with config and checkpoints")
     parser.add_argument(
         "--checkpoint_number",
         default=None,
@@ -52,7 +62,7 @@ if __name__=="__main__":
     env = MyMisc.continuous_env_maker(config=CONFIG["env_config"])
 
     history = []
-    for seed_i in range(100):
+    for seed_i in TEST_SEEDS:
         print(seed_i)
         env.seed(seed_i)
         obs = env.reset()
@@ -84,7 +94,7 @@ if __name__=="__main__":
     # # record some videos
 
     monitor_env = gym.wrappers.Monitor(env=env,
-                                    directory= os.path.dirname(checkpoint_path)+"/videos2",
+                                    directory= os.path.dirname(checkpoint_path)+"/videos",
                                    video_callable=lambda _:True,
                                    force=False,
                                   uid="seeds_test", mode="evaluation")
