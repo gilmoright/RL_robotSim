@@ -75,6 +75,7 @@ if __name__=="__main__":
         obs = env.reset()
         done = False
         total_reward = 0.0
+        steps_count = 0
         # Play one episode.
         start_time = time.time()
         while not done:
@@ -85,6 +86,7 @@ if __name__=="__main__":
             obs, reward, done, info = env.step(action)
             # Sum up rewards for reporting purposes.
             total_reward += reward
+            steps_count += 1
         elapsed_time = time.time() - start_time
         elapsed_time = time.strftime("%H:%M:%S", time.gmtime(elapsed_time))
         print(elapsed_time)
@@ -92,7 +94,8 @@ if __name__=="__main__":
             "seed": seed_i,
             "reward": total_reward,
             "done": done,
-            "time": elapsed_time
+            "time": elapsed_time,
+            "steps_count": steps_count
         })
         history[-1].update(info)
         pd.DataFrame(history).to_csv(table_save_path, index=False, sep=";", encoding="cp1251")
