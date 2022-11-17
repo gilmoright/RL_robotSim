@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 import sys
-sys.path.append("/s/ls4/users/grartem/RL_robots/continuous-grid-arctic/")
+# sys.path.append("/s/ls4/users/grartem/RL_robots/continuous-grid-arctic/")
+# sys.path.append("/home/sheins/rl-test/continuous-grid-arctic")
+sys.path.append("/s/ls4/users/slava1195/rl_rob/continuous-grid-arctic/")
 import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 import json

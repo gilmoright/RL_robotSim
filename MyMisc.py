@@ -2,7 +2,9 @@
 import sys
 import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
-sys.path.append("/s/ls4/users/grartem/RL_robots/continuous_grid_arctic")
+# sys.path.append("/s/ls4/users/grartem/RL_robots/continuous_grid_arctic")
+# sys.path.append("/home/sheins/rl-test/continuous-grid-arctic")
+sys.path.append("/s/ls4/users/slava1195/rl_rob/continuous-grid-arctic")
 import continuous_grid_arctic.follow_the_leader_continuous_env
 from continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_v1, LeaderTrajectory_v0
 
@@ -14,7 +16,7 @@ from ray.tune import register_env
 from gym import ObservationWrapper
 from gym.spaces import Box
 
-import gym_minigrid.envs
+# import gym_minigrid.envs
 
 class OneHotWrapper(ObservationWrapper):
     def __init__(self, env, vector_index, framestack):
