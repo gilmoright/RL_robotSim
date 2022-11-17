@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #SBATCH -J testppoE4F12
-#SBATCH -D /s/ls4/users/grartem/RL_robots/RL_robotSim
-#SBATCH -o /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/%x_%j.out
-#SBATCH -e /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/%x_%j.err
+#SBATCH -D /s/ls4/users/slava1195/RL_robots/RL_robotSim
+#SBATCH -o /s/ls4/users/slava1195/RL_robots/RL_robotSim/Logs/%x_%j.out
+#SBATCH -e /s/ls4/users/slava1195/RL_robots/RL_robotSim/Logs/%x_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
 #SBATCH -n 2
 #SBATCH --gres=gpu:k80:1
