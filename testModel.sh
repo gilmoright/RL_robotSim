@@ -21,13 +21,13 @@ RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env
 
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 190
+--checkpoint_number 280
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 200
+--checkpoint_number 290
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 210
+--checkpoint_number 300
 #python TestModel.py --rlalgo PPO \
 #--run_dir $RUN_DIR \
 #--checkpoint_number 40
