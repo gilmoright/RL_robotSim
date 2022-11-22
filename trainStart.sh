@@ -7,7 +7,7 @@
 #SBATCH -p hpc5-el7-gpu-3d
 #SBATCH -n 4
 #SBATCH --gres=gpu:k80:1
-#SBATCH --time=48:00:00
+#SBATCH --time=72:00:00
 
 export HOME=/s/ls4/users/slava1195
 export PATH=$HOME/anaconda3/envs/rl_robots/bin:$PATH
@@ -22,9 +22,9 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env8v2feats_v12_train5v7
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env8v2feats_v12_v1_train5v7
 
-#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env9v1feats_v12_train5v7
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env9v1feats_v12_train5v7 ppo_env9v2feats_v12_train5v7
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env9v2feats_v12_train5v7
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env9v3feats_v12_train5v7
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env9v3feats_v12_train5v7
 
 
 
