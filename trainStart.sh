@@ -5,7 +5,7 @@
 #SBATCH -o /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.out
 #SBATCH -e /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
-#SBATCH -n 4
+#SBATCH -n 8
 #SBATCH --gres=gpu:k80:2
 #SBATCH --time=72:00:00
 
