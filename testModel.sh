@@ -23,7 +23,7 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 #RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v3feats_v12_train5v7/PPO_continuous-grid_7f349_00001_1_2022-11-23_23-08-28
 #RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v1_d1_feats_v12_train5v7/PPO_continuous-grid_b539a_00000_0_2022-11-28_12-04-47
 
-RUN_DIR = /s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v1_d2_feats_v12_train5v7/PPO_continuous-grid_21183_00000_0_2022-11-30_19-57-53
+RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v1_d2_feats_v12_train5v7/PPO_continuous-grid_21183_00000_0_2022-11-30_19-57-53
 
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
