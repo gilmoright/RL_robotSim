@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J ppo_env10
+#SBATCH -J ppo_env10v2
 #SBATCH -D /s/ls4/users/slava1195/rl_rob/RL_robotSim
 #SBATCH -o /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.out
 #SBATCH -e /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.err
