@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -J testppoE4F12
+#SBATCH -J testppoE10F12
 #SBATCH -D /s/ls4/users/slava1195/rl_rob/RL_robotSim
 #SBATCH -o /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/%x_%j.out
 #SBATCH -e /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/%x_%j.err
@@ -25,19 +25,21 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 
 #RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v1_d2_feats_v12_train5v7/PPO_continuous-grid_21183_00000_0_2022-11-30_19-57-53
 
-RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v2feats_v12_train5v7/PPO_continuous-grid_7f349_00000_0_2022-11-23_23-07-46
+#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v2feats_v12_train5v7/PPO_continuous-grid_7f349_00000_0_2022-11-23_23-07-46
+
+RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v5_feats_v12_train5v7/PPO_continuous-grid_57f05_00000_0_2022-12-01_18-10-51
 
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 400
+--checkpoint_number 290
 
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 380
+--checkpoint_number 280
 
-python TestModel.py --rlalgo PPO \
---run_dir $RUN_DIR \
---checkpoint_number 350
+#python TestModel.py --rlalgo PPO \
+#--run_dir $RUN_DIR \
+#--checkpoint_number 350
 
 #python TestModel.py --rlalgo PPO \
 #--run_dir $RUN_DIR \
