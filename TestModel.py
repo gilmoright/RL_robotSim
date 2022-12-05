@@ -2,7 +2,7 @@
 # coding: utf-8
 import sys
 # sys.path.append("/s/ls4/users/grartem/RL_robots/continuous-grid-arctic/")
-#sys.path.append("/home/sheins/rl-test/continuous-grid-arctic")
+# sys.path.append("/home/sheins/rl_test/continuous-grid-arctic/")
 sys.path.append("/s/ls4/users/slava1195/rl_rob/continuous-grid-arctic/")
 import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -56,7 +56,7 @@ TEST_SEEDS = [4, 7, 9, 11, 12, 18, 19, 20, 22, 25, 27, 28, 29, 33, 36, 38, 39, 4
               140, 141, 142, 144, 146, 148, 149, 154, 157, 159, 160, 164, 166, 167, 170, 171, 172, 173, 178, 179,
               180, 182, 183, 186, 187, 188, 189, 190, 194, 195, 196]
 
-RECORD_SEEDS = [4, 7, 9, 11, 12, 18, 19, 20, 22, 25, 27, 28, 29, 33, 36]
+RECORD_SEEDS = []
 
 #RECORD_SEEDS = [1, 4, 5, 7 ,9, 10, 11, 14, 16, 17, 21, 24, 28, 29, 30, 32, 36, 38, 40, 43, 44, 45, 46, 49,
              #53, 58, 59, 60, 62, 63, 64, 65, 66, 70, 72, 73, 76, 82, 84, 85, 87, 88, 89, 90, 91, 92, 94, 95, 96, 97, 98, 99, 100,
