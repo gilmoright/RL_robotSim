@@ -40,13 +40,13 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 #RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env14/PPO/feats_v12_train_feats_v1/ppo_env14v1_feats_v12_feats_v1_train5v7/PPO_continuous-grid_4d6da_00001_1_2022-12-06_20-35-14
 ################ после косяков
 
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v2_feats_v12_train5v7/PPO_continuous-grid_dfcb8_00001_1_2022-12-08_14-53-26
-RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env14/PPO/feats_v12_train/ppo_env14v1_feats_v12_train5v7/PPO_continuous-grid_4d6da_00000_0_2022-12-06_20-34-57
+RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v2_feats_v12_train5v7/PPO_continuous-grid_dfcb8_00001_1_2022-12-08_14-53-26
+#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env14/PPO/feats_v12_train/ppo_env14v1_feats_v12_train5v7/PPO_continuous-grid_4d6da_00000_0_2022-12-06_20-34-57
 
 
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 390
+--checkpoint_number 10
 
 #python TestModel.py --rlalgo PPO \
 #--run_dir $RUN_DIR \
