@@ -1,8 +1,4 @@
 #!/usr/bin/env python
-import sys
-sys.path.append("/s/ls4/users/slava1195/rl_robots/RL_robotSim")
-sys.path.append("/s/ls4/users/slava1195/rl_robots/continuous-grid-arctic")
-sys.path.append("/s/ls4/users/slava1195/rl_robots/RL_robotSim/Configs")
 
 import argparse
 import os
