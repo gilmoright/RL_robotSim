@@ -69,9 +69,11 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 ##### 16.09.2022
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env20v2_feats_v12_train5v7 ppo_env20v4_feats_v12_train5v7 ppo_env20v2_feats_v12_feats_v1_train5v7
 
-#### 21.09.2022
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env20v1_feats_v12_train5v7 ppo_env20v1_1_feats_v12_train5v7 ppo_env20v1_feats_v12_train5v7_1500
+##### 21.09.2022
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env20v1_feats_v12_train5v7 ppo_env20v1_1_feats_v12_train5v7 ppo_env20v1_feats_v12_train5v7_1500
 
+#### 08.02.2023
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_env21v1_feats_v15_lstmv7v2 ppo_env21v1_feats_v15_lstmv7v2 ppo_env21v1_feats_v15_v5v7_sqd
 
 #ЗАпустить потом
 #ppo_env12v2_feats_v12_feats_v1_train5v7
