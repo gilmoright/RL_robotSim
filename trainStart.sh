@@ -84,5 +84,8 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 ##### 13.02.2023
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv1_env23v1_feats_v15_fi_lstm_v10v1 ppo_sv1_env23v2_feats_v15_fi_lstm_v10_v2 ppo_sv1_env23v1_feats_v15_fi_v5v8_sqd
 
-#### 15.02.2023
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv1_env24v1_feats_v17_fi_lstm_v10v1 ppo_sv1_env24v1_feats_v17_fi_lstm_v10_v2 ppo_sv1_env24v1_feats_v17_fi_v5v8_sqd
+##### 15.02.2023
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv1_env24v1_feats_v17_fi_lstm_v10v1 ppo_sv1_env24v1_feats_v17_fi_lstm_v10_v2 ppo_sv1_env24v1_feats_v17_fi_v5v8_sqd
+
+#### 17.02.2023
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv2_env24v1_feats_v17_fi_v5v8_sqd ppo_sv2_env24v1_feats_v17_fi_v5v8_sqd ppo_sv2_env24v1_feats_v17_fi_v5v8_sqd
