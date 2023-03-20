@@ -90,5 +90,9 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 ##### 17.02.2023
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv1_env24v1_feats_v16_fi_v5v8_sqd ppo_sv2_env24v1_feats_v17_fi_v5v2_sqd ppo_sv1_env24v1_feats_v17_fi_v5v8_sqd
 
+##### 17.03.2023
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1 ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v2 ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1_bear_v2
+
+
 #### 17.03.2023
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1 ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v2 ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1_bear_v2
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1_th ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v2_th ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1_bear_v2_th
