@@ -62,25 +62,29 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 
 # env 17V1_70
 
-# env 19v1 35
-RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env19/PPO/feats_v12_train_35/ppo_env19v1_feats_v12_train5v7/PPO_continuous-grid_45046_00000_0_2022-12-15_16-34-59
+## env 19v1 35
+#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env19/PPO/feats_v12_train_35/ppo_env19v1_feats_v12_train5v7/PPO_continuous-grid_45046_00000_0_2022-12-15_16-34-59
+
+# env 24_new ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1
+RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env24_new/PPO_sv2/feats_v12_train_35/ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1/PPO_continuous-grid_712b9_00000_0_2023-03-17_15-44-22
 
 
-python TestModel.py --rlalgo PPO \
---run_dir $RUN_DIR \
---checkpoint_number 380
-
-python TestModel.py --rlalgo PPO \
---run_dir $RUN_DIR \
---checkpoint_number 340
 
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 140
+--checkpoint_number 495
 
-python TestModel.py --rlalgo PPO \
---run_dir $RUN_DIR \
---checkpoint_number 200
+#python TestModel.py --rlalgo PPO \
+#--run_dir $RUN_DIR \
+#--checkpoint_number 340
+#
+#python TestModel.py --rlalgo PPO \
+#--run_dir $RUN_DIR \
+#--checkpoint_number 140
+#
+#python TestModel.py --rlalgo PPO \
+#--run_dir $RUN_DIR \
+#--checkpoint_number 200
 #
 #python TestModel.py --rlalgo PPO \
 #--run_dir $RUN_DIR \
