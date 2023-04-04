@@ -17,7 +17,9 @@ from ray.rllib.utils.deprecation import deprecation_warning
 from ray.rllib.utils.framework import try_import_tf, try_import_torch
 
 import MyMisc
-import MyModel
+# import MyModel
+import MyTfModel
+
 
 try:
     class_name = get_ipython().__class__.__name__
