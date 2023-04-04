@@ -103,8 +103,10 @@ class MyTransformerModel(TFModelV2):
 
         # input_shape = obs_space.shape[1:]
         # input_shape = obs_space.shape[0]
-        input_shape = tf.keras.layers.Input(
-            shape=obs_space.shape, name="observations")
+        # input_shape = tf.keras.layers.Input(
+        #     shape=obs_space.shape, name="observations")
+        input_shape = obs_space.shape
+        print(obs_space.shape)
         print("AAAAAAAAAAAAAA", input_shape)
         self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=4,
                                            mlp_units=[128], mlp_dropout=0.4, dropout=0.25, n_classes=2)
@@ -113,13 +115,13 @@ class MyTransformerModel(TFModelV2):
                     mlp_dropout=0,
                     n_classes=2):
 
-        # inputs = tf.keras.Input(shape=input_shape)
+        inputs = tf.keras.Input(shape=input_shape)
         x = input_shape
         for dim in mlp_units:
             x = tf.keras.layers.Dense(dim, activation="relu")(x)
             x = tf.keras.layers.Dropout(mlp_dropout)(x)
         outputs = tf.keras.layers.Dense(n_classes, activation="softmax")(x)
-        return tf.keras.Model(input_shape, outputs)
+        return tf.keras.Model(input, outputs)
 
 
 
