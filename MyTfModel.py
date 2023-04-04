@@ -30,7 +30,7 @@ class MyTransformerModel(TFModelV2):
         )
 
         input_shape = obs_space.shape[1:]
-        self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=2,
+        self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=4,
                                            mlp_units=[128], mlp_dropout=0.4, dropout=0.25, n_classes=2)
 
     def build_model(self, input_shape, head_size, num_heads, ff_dim, num_transformer_blocks, mlp_units, dropout=0,
@@ -40,7 +40,7 @@ class MyTransformerModel(TFModelV2):
         inputs = tf.keras.Input(shape=input_shape)
         x = inputs
         # x = tf.keras.layers.Embedding(100, 64, input_length=32)(x)
-        # x = keras_nlp.layers.SinePositionEncoding()(x)
+        x = keras_nlp.layers.SinePositionEncoding()(x)
         for _ in range(num_transformer_blocks):
             x = self.transformer_encoder(x, head_size, num_heads, ff_dim, dropout)
 
