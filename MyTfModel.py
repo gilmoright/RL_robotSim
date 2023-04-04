@@ -2,6 +2,8 @@ import numpy as np
 import gym
 from typing import Dict, Optional, Sequence
 
+import keras_nlp
+
 from ray.rllib.models.tf.misc import normc_initializer
 from ray.rllib.models.tf.tf_modelv2 import TFModelV2
 from ray.rllib.models.utils import get_activation_fn
