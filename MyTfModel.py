@@ -46,24 +46,40 @@ class MyTransformerModel(TFModelV2):
 
         x = tf.keras.layers.GlobalAveragePooling1D(data_format="channels_first")(x)
         for dim in mlp_units:
-            x = tf.keras.layers.Dense(dim, activation="tanh")(x)
+            x = tf.keras.layers.Dense(dim, activation="relu")(x)
             x = tf.keras.layers.Dropout(mlp_dropout)(x)
         outputs = tf.keras.layers.Dense(n_classes, activation="softmax")(x)
         return tf.keras.Model(inputs, outputs)
 
+    # def transformer_encoder(self, inputs, head_size, num_heads, ff_dim, dropout=0):
+    #     # Normalization and Attention
+    #     x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(inputs)
+    #     x = tf.keras.layers.MultiHeadAttention(
+    #         key_dim=head_size, num_heads=num_heads, dropout=dropout)(x, x)
+    #     x = tf.keras.layers.Dropout(dropout)(x)
+    #     res = x + inputs
+    #
+    #     # Feed Forward Part
+    #     x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(res)
+    #     x = tf.keras.layers.Conv1D(filters=ff_dim, kernel_size=1, activation="tanh")(x)
+    #     x = tf.keras.layers.Dropout(dropout)(x)
+    #     x = tf.keras.layers.Conv1D(filters=inputs.shape[-1], kernel_size=1)(x)
+    #     return x + res
+
     def transformer_encoder(self, inputs, head_size, num_heads, ff_dim, dropout=0):
-        # Normalization and Attention
-        x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(inputs)
+        # Attention and Normalization
         x = tf.keras.layers.MultiHeadAttention(
-            key_dim=head_size, num_heads=num_heads, dropout=dropout)(x, x)
+            key_dim=head_size, num_heads=num_heads, dropout=dropout
+        )(inputs, inputs)
         x = tf.keras.layers.Dropout(dropout)(x)
+        x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(x)
         res = x + inputs
 
         # Feed Forward Part
-        x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(res)
-        x = tf.keras.layers.Conv1D(filters=ff_dim, kernel_size=1, activation="tanh")(x)
+        x = tf.keras.layers.Conv1D(filters=ff_dim, kernel_size=1, activation="relu")(res)
         x = tf.keras.layers.Dropout(dropout)(x)
         x = tf.keras.layers.Conv1D(filters=inputs.shape[-1], kernel_size=1)(x)
+        x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(x)
         return x + res
 
     def forward(self, input_dict, state, seq_lens):
