@@ -113,7 +113,7 @@ class MyTransformerModel(TFModelV2):
                     n_classes=2):
 
         # inputs = tf.keras.Input(shape=input_shape)
-        x = inputs
+        x = input_shape
         for dim in mlp_units:
             x = tf.keras.layers.Dense(dim, activation="relu")(x)
             x = tf.keras.layers.Dropout(mlp_dropout)(x)
