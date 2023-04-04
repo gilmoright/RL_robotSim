@@ -101,7 +101,8 @@ class MyTransformerModel(TFModelV2):
             obs_space, action_space, num_outputs, model_config, name
         )
 
-        input_shape = obs_space.shape[1:]
+        # input_shape = obs_space.shape[1:]
+        input_shape = obs_space.shape[0]
         self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=4,
                                            mlp_units=[128], mlp_dropout=0.4, dropout=0.25, n_classes=2)
 
