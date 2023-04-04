@@ -18,78 +18,6 @@ tf1, tf, tfv = try_import_tf()
 # Конволюция не юзается или она где-то до этого используется?
 
 
-# class MyTransformerModel(TFModelV2):
-#     def __init__(self,
-#                  obs_space,
-#                  action_space,
-#                  num_outputs,
-#                  model_config,
-#                  name):
-#         super(MyTransformerModel, self).__init__(
-#             obs_space, action_space, num_outputs, model_config, name
-#         )
-#
-#         input_shape = obs_space.shape[1:]
-#         self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=4,
-#                                            mlp_units=[128], mlp_dropout=0.4, dropout=0.25, n_classes=2)
-#
-#     def build_model(self, input_shape, head_size, num_heads, ff_dim, num_transformer_blocks, mlp_units, dropout=0,
-#                     mlp_dropout=0,
-#                     n_classes=2):
-#
-#         inputs = tf.keras.Input(shape=input_shape)
-#         x = inputs
-#         # x = tf.keras.layers.Embedding(100, 64, input_length=32)(x)
-#         x = keras_nlp.layers.SinePositionEncoding()(x)
-#         for _ in range(num_transformer_blocks):
-#             x = self.transformer_encoder(x, head_size, num_heads, ff_dim, dropout)
-#
-#         x = tf.keras.layers.GlobalAveragePooling1D(data_format="channels_first")(x)
-#         for dim in mlp_units:
-#             x = tf.keras.layers.Dense(dim, activation="relu")(x)
-#             x = tf.keras.layers.Dropout(mlp_dropout)(x)
-#         outputs = tf.keras.layers.Dense(n_classes, activation="softmax")(x)
-#         return tf.keras.Model(inputs, outputs)
-#
-#     # def transformer_encoder(self, inputs, head_size, num_heads, ff_dim, dropout=0):
-#     #     # Normalization and Attention
-#     #     x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(inputs)
-#     #     x = tf.keras.layers.MultiHeadAttention(
-#     #         key_dim=head_size, num_heads=num_heads, dropout=dropout)(x, x)
-#     #     x = tf.keras.layers.Dropout(dropout)(x)
-#     #     res = x + inputs
-#     #
-#     #     # Feed Forward Part
-#     #     x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(res)
-#     #     x = tf.keras.layers.Conv1D(filters=ff_dim, kernel_size=1, activation="tanh")(x)
-#     #     x = tf.keras.layers.Dropout(dropout)(x)
-#     #     x = tf.keras.layers.Conv1D(filters=inputs.shape[-1], kernel_size=1)(x)
-#     #     return x + res
-#
-#     def transformer_encoder(self, inputs, head_size, num_heads, ff_dim, dropout=0):
-#         # Attention and Normalization
-#         x = tf.keras.layers.MultiHeadAttention(
-#             key_dim=head_size, num_heads=num_heads, dropout=dropout
-#         )(inputs, inputs)
-#         x = tf.keras.layers.Dropout(dropout)(x)
-#         x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(x)
-#         res = x + inputs
-#
-#         # Feed Forward Part
-#         x = tf.keras.layers.Conv1D(filters=ff_dim, kernel_size=1, activation="relu")(res)
-#         x = tf.keras.layers.Dropout(dropout)(x)
-#         x = tf.keras.layers.Conv1D(filters=inputs.shape[-1], kernel_size=1)(x)
-#         x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(x)
-#         return x + res
-#
-#     def forward(self, input_dict, state, seq_lens):
-#         model_out, self._value_out = self.base_model(input_dict["obs"])
-#         return model_out, state
-#
-#     def value_function(self):
-#         return tf.reshape(self._value_out, [-1])
-
-
 class MyTransformerModel(TFModelV2):
     def __init__(self,
                  obs_space,
@@ -102,34 +30,58 @@ class MyTransformerModel(TFModelV2):
         )
 
         # input_shape = obs_space.shape[1:]
-        # input_shape = obs_space.shape[0]
-        # input_shape = tf.keras.layers.Input(
-        #     shape=obs_space.shape, name="observations")
         input_shape = obs_space.shape
-        print(obs_space.shape)
-        print("AAAAAAAAAAAAAA", input_shape)
         self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=4,
                                            mlp_units=[128], mlp_dropout=0.4, dropout=0.25, n_classes=2)
 
-    def build_model(self, input_shape, head_size, num_heads, ff_dim, num_transformer_blocks,
-                    mlp_units,
-                    dropout=0,
+    def build_model(self, input_shape, head_size, num_heads, ff_dim, num_transformer_blocks, mlp_units, dropout=0,
                     mlp_dropout=0,
                     n_classes=2):
 
         inputs = tf.keras.Input(shape=input_shape)
-        x = input_shape
-        print("11111",x)
-        x = tf.keras.layers.Dense(512, activation="tanh")(x)
-        x = tf.keras.layers.Dense(512, activation="tanh")(x)
+        x = inputs
+        # x = tf.keras.layers.Embedding(100, 64, input_length=32)(x)
+        x = keras_nlp.layers.SinePositionEncoding()(x)
+        for _ in range(num_transformer_blocks):
+            x = self.transformer_encoder(x, head_size, num_heads, ff_dim, dropout)
 
-        # for dim in mlp_units:
-            # x = tf.keras.layers.Dense(dim, activation="relu")(x)
-            # x = tf.keras.layers.Dropout(mlp_dropout)(x)
+        x = tf.keras.layers.GlobalAveragePooling1D(data_format="channels_first")(x)
+        for dim in mlp_units:
+            x = tf.keras.layers.Dense(dim, activation="relu")(x)
+            x = tf.keras.layers.Dropout(mlp_dropout)(x)
         outputs = tf.keras.layers.Dense(n_classes, activation="softmax")(x)
         return tf.keras.Model(inputs, outputs)
 
+    # def transformer_encoder(self, inputs, head_size, num_heads, ff_dim, dropout=0):
+    #     # Normalization and Attention
+    #     x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(inputs)
+    #     x = tf.keras.layers.MultiHeadAttention(
+    #         key_dim=head_size, num_heads=num_heads, dropout=dropout)(x, x)
+    #     x = tf.keras.layers.Dropout(dropout)(x)
+    #     res = x + inputs
+    #
+    #     # Feed Forward Part
+    #     x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(res)
+    #     x = tf.keras.layers.Conv1D(filters=ff_dim, kernel_size=1, activation="tanh")(x)
+    #     x = tf.keras.layers.Dropout(dropout)(x)
+    #     x = tf.keras.layers.Conv1D(filters=inputs.shape[-1], kernel_size=1)(x)
+    #     return x + res
 
+    def transformer_encoder(self, inputs, head_size, num_heads, ff_dim, dropout=0):
+        # Attention and Normalization
+        x = tf.keras.layers.MultiHeadAttention(
+            key_dim=head_size, num_heads=num_heads, dropout=dropout
+        )(inputs, inputs)
+        x = tf.keras.layers.Dropout(dropout)(x)
+        x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(x)
+        res = x + inputs
+
+        # Feed Forward Part
+        x = tf.keras.layers.Conv1D(filters=ff_dim, kernel_size=1, activation="relu")(res)
+        x = tf.keras.layers.Dropout(dropout)(x)
+        x = tf.keras.layers.Conv1D(filters=inputs.shape[-1], kernel_size=1)(x)
+        x = tf.keras.layers.LayerNormalization(epsilon=1e-6)(x)
+        return x + res
 
     def forward(self, input_dict, state, seq_lens):
         model_out, self._value_out = self.base_model(input_dict["obs"])
@@ -137,6 +89,55 @@ class MyTransformerModel(TFModelV2):
 
     def value_function(self):
         return tf.reshape(self._value_out, [-1])
+
+
+# class MyTransformerModel(TFModelV2):
+#     def __init__(self,
+#                  obs_space,
+#                  action_space,
+#                  num_outputs,
+#                  model_config,
+#                  name):
+#         super(MyTransformerModel, self).__init__(
+#             obs_space, action_space, num_outputs, model_config, name
+#         )
+#
+#         # input_shape = obs_space.shape[1:]
+#         # input_shape = obs_space.shape[0]
+#         # input_shape = tf.keras.layers.Input(
+#         #     shape=obs_space.shape, name="observations")
+#         input_shape = obs_space.shape
+#         print(obs_space.shape)
+#         print("AAAAAAAAAAAAAA", input_shape)
+#         self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=4,
+#                                            mlp_units=[128], mlp_dropout=0.4, dropout=0.25, n_classes=2)
+#
+#     def build_model(self, input_shape, head_size, num_heads, ff_dim, num_transformer_blocks,
+#                     mlp_units,
+#                     dropout=0,
+#                     mlp_dropout=0,
+#                     n_classes=2):
+#
+#         inputs = tf.keras.Input(shape=input_shape)
+#         x = input_shape
+#         print("11111",x)
+#         x = tf.keras.layers.Dense(512, activation="tanh")(x)
+#         x = tf.keras.layers.Dense(512, activation="tanh")(x)
+#
+#         # for dim in mlp_units:
+#             # x = tf.keras.layers.Dense(dim, activation="relu")(x)
+#             # x = tf.keras.layers.Dropout(mlp_dropout)(x)
+#         outputs = tf.keras.layers.Dense(n_classes, activation="softmax")(x)
+#         return tf.keras.Model(inputs, outputs)
+#
+#
+#
+#     def forward(self, input_dict, state, seq_lens):
+#         model_out, self._value_out = self.base_model(input_dict["obs"])
+#         return model_out, state
+#
+#     def value_function(self):
+#         return tf.reshape(self._value_out, [-1])
 
 
 ModelCatalog.register_custom_model("transformer_model", MyTransformerModel)
