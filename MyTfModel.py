@@ -111,15 +111,20 @@ class MyTransformerModel(TFModelV2):
         self.base_model = self.build_model(input_shape, head_size=256, num_heads=4, ff_dim=4, num_transformer_blocks=4,
                                            mlp_units=[128], mlp_dropout=0.4, dropout=0.25, n_classes=2)
 
-    def build_model(self, input_shape, head_size, num_heads, ff_dim, num_transformer_blocks, mlp_units, dropout=0,
+    def build_model(self, input_shape, head_size, num_heads, ff_dim, num_transformer_blocks,
+                    mlp_units,
+                    dropout=0,
                     mlp_dropout=0,
                     n_classes=2):
 
         inputs = tf.keras.Input(shape=input_shape)
         x = input_shape
-        for dim in mlp_units:
-            x = tf.keras.layers.Dense(dim, activation="relu")(x)
-            x = tf.keras.layers.Dropout(mlp_dropout)(x)
+        x = tf.keras.layers.Dense(512, activation="tanh")(x)
+        x = tf.keras.layers.Dense(512, activation="tanh")(x)
+
+        # for dim in mlp_units:
+            # x = tf.keras.layers.Dense(dim, activation="relu")(x)
+            # x = tf.keras.layers.Dropout(mlp_dropout)(x)
         outputs = tf.keras.layers.Dense(n_classes, activation="softmax")(x)
         return tf.keras.Model(inputs, outputs)
 
