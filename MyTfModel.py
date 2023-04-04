@@ -119,6 +119,7 @@ class MyTransformerModel(TFModelV2):
 
         inputs = tf.keras.Input(shape=input_shape)
         x = input_shape
+        print("11111",x)
         x = tf.keras.layers.Dense(512, activation="tanh")(x)
         x = tf.keras.layers.Dense(512, activation="tanh")(x)
 
