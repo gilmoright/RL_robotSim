@@ -121,7 +121,7 @@ class MyTransformerModel(TFModelV2):
             x = tf.keras.layers.Dense(dim, activation="relu")(x)
             x = tf.keras.layers.Dropout(mlp_dropout)(x)
         outputs = tf.keras.layers.Dense(n_classes, activation="softmax")(x)
-        return tf.keras.Model(input, outputs)
+        return tf.keras.Model(inputs, outputs)
 
 
 
