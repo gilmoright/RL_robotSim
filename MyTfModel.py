@@ -84,6 +84,7 @@ class MyTransformerModel(TFModelV2):
         return x + res
 
     def forward(self, input_dict, state, seq_lens):
+        print(input_dict["obs"])
         model_out, self._value_out = self.base_model(input_dict["obs"])
         return model_out, state
 
