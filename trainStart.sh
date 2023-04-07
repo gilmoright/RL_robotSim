@@ -5,8 +5,8 @@
 #SBATCH -o /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.out
 #SBATCH -e /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
-#SBATCH -n 4
-#SBATCH --gres=gpu:k80:1
+#SBATCH -n 12
+#SBATCH --gres=gpu:k80:3
 #SBATCH --time=72:00:00
 
 export HOME=/s/ls4/users/slava1195
@@ -103,5 +103,8 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 ##### 30.03.2023
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env26v2_feats_v14_v5v8_sqd_th ppo_sv_env26v2_feats_v16_v5v8_sqd_th
 
-#### 04.04.2023
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env27v2_tf_feats_v14_v5v8_sqd_th
+##### 04.04.2023
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env27v2_tf_feats_v14_v5v8_sqd_th
+
+#### 07.04.2023
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_10 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_20
