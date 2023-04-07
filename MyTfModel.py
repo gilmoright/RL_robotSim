@@ -125,7 +125,7 @@ class MyKerasTransformerModel_V2(TFModelV2):
             activation="tanh",
 
         )(x)
-        x = layers.Dropout(mlp_dropout)(x)
+        x = tf.keras.layers.Dropout(mlp_dropout)(x)
 
         layer_1 = tf.keras.layers.Dense(
             512,
