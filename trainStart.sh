@@ -106,5 +106,8 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 ##### 04.04.2023
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env27v2_tf_feats_v14_v5v8_sqd_th
 
-#### 07.04.2023
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_10 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_20
+##### 07.04.2023
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_10 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_20
+
+#### 11.04.2023
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5 ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_10 ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5_m1
