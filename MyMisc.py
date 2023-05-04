@@ -4,7 +4,7 @@ import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 sys.path.append("/s/ls4/users/grartem/RL_robots/continuous_grid_arctic")
 import continuous_grid_arctic.follow_the_leader_continuous_env
-from continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_v1, LeaderTrajectory_v0
+from continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_lidarMap2d, LeaderTrajectory_v0
 
 import gym
 from collections import deque
@@ -147,8 +147,8 @@ def continuous_env_maker(config):
     assert not (ContinuousObserveModifier_v0 in config["wrappers"] and LeaderTrajectory_v0 in config["wrappers"])
     if 'ContinuousObserveModifier_v0' in config["wrappers"]:
         env = ContinuousObserveModifier_v0(env, action_values_range)
-    if 'ContinuousObserveModifier_v1' in config["wrappers"]:
-        env = ContinuousObserveModifier_v1(env)
+    if 'ContinuousObserveModifier_lidarMap2d' in config["wrappers"]:
+        env = ContinuousObserveModifier_lidarMap2d(env, action_values_range, map_wrapper_forgetting_rate=config.get("map_wrapper_forgetting_rate", None), add_safezone_on_map=config.get("add_safezone_on_map", False))
     elif "LeaderTrajectory_v0" in config["wrappers"]:
         env = LeaderTrajectory_v0(env, framestack, config.get('radar_sectors_number', 180))
     if 'MyFrameStack' in config['wrappers']:
