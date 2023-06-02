@@ -18,7 +18,8 @@ from ray.rllib.utils.framework import try_import_tf, try_import_torch
 
 import MyMisc
 # import MyModel
-import MyTfModel
+# import MyTfModel
+import MyNewModels
 
 
 try:
