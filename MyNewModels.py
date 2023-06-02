@@ -335,14 +335,14 @@ class BiLSTMModelPrevV2(TFModelV2):
         x = tf.keras.layers.Dense(
             256,
             name="my_layer2",
-            activation=tf.nn.relu,
+            activation=tf.nn.tanh,
             kernel_initializer=normc_initializer(1.0),
         )(x)
 
         layer_1 = tf.keras.layers.Dense(
             256,
             name="my_layer1",
-            activation=tf.nn.relu,
+            activation=tf.nn.tanh,
             kernel_initializer=normc_initializer(1.0),
         )(x)
         layer_out = tf.keras.layers.Dense(
