@@ -1,16 +1,16 @@
 #!/bin/bash
 
-#SBATCH -J ppo_env123
-#SBATCH -D /s/ls4/users/slava1195/rl_rob/RL_robotSim
-#SBATCH -o /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.out
-#SBATCH -e /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/Continuous_%x_%j.err
+#SBATCH -J ppo_env28
+#SBATCH -D /s/ls4/users/grartem/RL_robots/RL_robotSim
+#SBATCH -o /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/Continuous_%x_%j.out
+#SBATCH -e /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/Continuous_%x_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
-#SBATCH -n 12
-#SBATCH --gres=gpu:k80:3
+#SBATCH -n 8
+#SBATCH --gres=gpu:k80:2
 #SBATCH --time=72:00:00
 
-export HOME=/s/ls4/users/slava1195
-export PATH=$HOME/anaconda3/envs/rl_robots/bin:$PATH
+export HOME=/s/ls4/users/grartem
+source activate rl_robots
 
 export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:$HOME/installation_dists/cudnn-9.0-linux-x64-v7.1.ga/lib64:
 
@@ -110,4 +110,13 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_10 ppo_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_20
 
 #### 11.04.2023
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5 ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_10 ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5_m1
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst.conf --experiments ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5 ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_10 ppo_v1_sv_env27v2_tf_feats_v14_train_v5v7_sqd_v1_pr_5_m1
+
+### 2.06.2023
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_obst.conf --experiments ppo_env4_feats13v10 ppo_env4_feats13v11
+
+### 7.06.2023
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments ppo_e28_b1_f14v2_prev5_m_trans_v1
+### 7.06.2023
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments ppo_e28_b1_f14v2_prev5_m_trans_v4v2 ppo_e28_b1_f14v2_prev5_m_trans_v4v3
+# ppo_e28_b1_f14v2_prev5_m_trans
