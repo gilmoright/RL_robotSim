@@ -5,8 +5,8 @@
 #SBATCH -o /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/Continuous_%x_%j.out
 #SBATCH -e /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/Continuous_%x_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
-#SBATCH -n 8
-#SBATCH --gres=gpu:k80:2
+#SBATCH -n 4
+#SBATCH --gres=gpu:k80:1
 #SBATCH --time=72:00:00
 
 export HOME=/s/ls4/users/grartem
@@ -118,5 +118,10 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 ### 7.06.2023
 #python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments ppo_e28_b1_f14v2_prev5_m_trans_v1
 ### 7.06.2023
-python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments ppo_e28_b1_f14v2_prev5_m_trans_v4v2 ppo_e28_b1_f14v2_prev5_m_trans_v4v3
-# ppo_e28_b1_f14v2_prev5_m_trans
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments ppo_e28_b1_f14v2_prev5_m_trans_v4 ppo_e28_b1_f14v2_prev5_m_trans_v4v2
+
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments ppo_e28_b1_f14v2_prev5_m_transv4v2_train_v5v6sqd ppo_e28_b1_f14v2_prev5_m_transv4v2_train_v5v10ppo ppo_e28_b1_f14v2_prev5_m_transv4v2_train_v5v11sqd
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments  ppo_e28_b2_f14v2_prev5_m_defv1_train_v5v10
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments  ppo_e28_b1_f14v2_prev5_m_transv4v2_train_v5v14ppo ppo_e28_b1_f14v2_prev5_m_transv4v2_train_v5v15ppo ppo_e28_b1_f14v2_prev5_m_transv4v2_train_v5v16ppo
+#python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments  ppo_e28_b1_f14v2_prev5_m_transv4v2_train_v5v17ppo 
+python MyTrain.py --config-file Configs/FollowerContinuous/PPO_dyn_obst_2.conf --experiments  ppo_e28_b1_f14v2_prev5_m_defv1_train_v5v16

@@ -277,11 +277,13 @@ class MyKerasTransformerModel_V4(TFModelV2):
         # todo
 
         head_size = model_config["custom_model_config"]["head_size"]
-        num_heads = 4
+        num_heads = model_config["custom_model_config"]["num_heads"]
         ff_dim = obs_space.shape[-1]
         dropout = model_config["custom_model_config"]["dropout"]
 
-        x = self.transformer_encoder(x, head_size, num_heads, ff_dim, dropout)
+        for tb_i in range(model_config["custom_model_config"]["transformer_blocks_count"]):
+            x = self.transformer_encoder(x, head_size, num_heads, ff_dim, dropout)
+
         if model_config["custom_model_config"]["flattening_type"] == "GlobalAveragePooling1D":
             x = tf.keras.layers.GlobalAveragePooling1D(data_format="channels_first")(x)
         elif model_config["custom_model_config"]["flattening_type"] == "Flatten":
@@ -303,7 +305,7 @@ class MyKerasTransformerModel_V4(TFModelV2):
             activation=None,
             kernel_initializer=normc_initializer(0.01),
         )(layer_1)
-
+        layer_out_clipped = tf.clip_by_value(layer_out, clip_value_min=-10, clip_value_max=10)
         value_out = tf.keras.layers.Dense(
             1,
             name="value_out",
@@ -311,7 +313,8 @@ class MyKerasTransformerModel_V4(TFModelV2):
             kernel_initializer=normc_initializer(0.01),
         )(layer_1)
 
-        self.base_model = tf.keras.Model(self.inputs, [layer_out, value_out])
+
+        self.base_model = tf.keras.Model(self.inputs, [layer_out_clipped, value_out])
 
     def transformer_encoder(self, inputs, head_size, num_heads, ff_dim, dropout=0):
         # Attention and Normalization
