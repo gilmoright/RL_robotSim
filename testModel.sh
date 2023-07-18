@@ -1,15 +1,15 @@
 #!/bin/bash
 
 #SBATCH -J testppoE10F12
-#SBATCH -D /s/ls4/users/slava1195/rl_rob/RL_robotSim
-#SBATCH -o /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/%x_%j.out
-#SBATCH -e /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/%x_%j.err
-#SBATCH -p hpc5-el7-gpu-3d
+#SBATCH -D /s/ls4/users/grartem/RL_robots/RL_robotSim
+#SBATCH -o /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/%x_%j.out
+#SBATCH -e /s/ls4/users/grartem/RL_robots/RL_robotSim/Logs/%x_%j.err
+#SBATCH -p hpc4-el7-gpu-3d
 #SBATCH -n 2
 #SBATCH --gres=gpu:k80:1
 #SBATCH --time=48:00:00
 
-export HOME=/s/ls4/users/slava1195
+export HOME=/s/ls4/users/grartem
 export PATH=$HOME/anaconda3/envs/rl_robots/bin:$PATH
 
 export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:$HOME/installation_dists/cudnn-9.0-linux-x64-v7.1.ga/lib64:
@@ -66,13 +66,14 @@ export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:
 #RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env19/PPO/feats_v12_train_35/ppo_env19v1_feats_v12_train5v7/PPO_continuous-grid_45046_00000_0_2022-12-15_16-34-59
 
 # env 24_new ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1
-RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env24_new/PPO_sv2/feats_v12_train_35/ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1/PPO_continuous-grid_712b9_00000_0_2023-03-17_15-44-22
+#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env24_new/PPO_sv2/feats_v12_train_35/ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1/PPO_continuous-grid_712b9_00000_0_2023-03-17_15-44-22
 
+RUN_DIR=/s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous_Prev/env28/PPO/trans/ppo_e28_b1_f14v2_prev5_m_transv4v5_train_v5v16ppo/PPO_continuous-grid_40ee5_00000_0_2023-06-23_17-50-11/
 
 
 python TestModel.py --rlalgo PPO \
 --run_dir $RUN_DIR \
---checkpoint_number 495
+--checkpoint_number 250
 
 #python TestModel.py --rlalgo PPO \
 #--run_dir $RUN_DIR \
