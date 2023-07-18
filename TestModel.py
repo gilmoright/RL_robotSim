@@ -18,6 +18,8 @@ from ray.rllib.agents.ppo.ppo import PPOTrainer
 from ray.rllib.agents.ddpg.td3 import TD3Trainer
 
 import MyMisc
+import MyTfModel
+import MyNewModels
 
 #TEST_SEEDS = range(100)
 #TEST_SEEDS = [1, 4, 5, 7 ,9, 10, 11, 14, 16, 17, 21, 24, 28, 29, 30, 32, 36, 38, 40, 43, 44, 45, 46, 49,
