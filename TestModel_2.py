@@ -3,7 +3,7 @@
 import sys
 # sys.path.append("/s/ls4/users/grartem/RL_robots/continuous-grid-arctic/")
 # sys.path.append("/home/sheins/rl_test/continuous-grid-arctic/")
-sys.path.append("/s/ls4/users/slava1195/rl_rob/continuous-grid-arctic/")
+sys.path.append("/s/ls4/users/slava1195/rl_rob_2/continuous-grid-arctic/")
 import os
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 import json
@@ -18,6 +18,7 @@ from ray.rllib.agents.ppo.ppo import PPOTrainer
 from ray.rllib.agents.ddpg.td3 import TD3Trainer
 
 import MyMisc
+import MyNewModels
 
 seeds_env19v1_100 = [4, 5, 7, 9, 10, 12, 13, 14, 16, 17, 18, 21, 22, 23, 25, 27, 30, 32, 35, 38, 40, 44, 46, 47, 48, 49,
                  50, 52, 55, 59, 60, 64, 65, 68, 73, 74, 75, 76, 77, 81, 82, 83, 85, 86, 88, 90, 93, 95, 97, 98, 99,
@@ -45,19 +46,13 @@ if __name__=="__main__":
         type=str,
         help="path experiment dir with config and checkpoints")
     parser.add_argument(
-        "--config_dir",
-        default=None,
-        type=str,
-        help="path to config dir with")
-    parser.add_argument(
         "--checkpoint_number",
         default=None,
         type=str,
         help="number of the checkpoint to evaluate")
     args = parser.parse_args()
-    CONFIG_DIR = args.config_dir
     EXPERIMENT_DIR = args.run_dir
-    with open(CONFIG_DIR + "/params.json", "r") as f:
+    with open(EXPERIMENT_DIR + "/params.json", "r") as f:
         CONFIG = json.load(f)
     #CONFIG = configs[args.experiment_name].as_plain_ordered_dict()
     CONFIG["num_workers"]=1

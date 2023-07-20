@@ -1,139 +1,86 @@
 #!/bin/bash
 
-#SBATCH -J testppoE10F12
-#SBATCH -D /s/ls4/users/slava1195/rl_rob/RL_robotSim
-#SBATCH -o /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/%x_%j.out
-#SBATCH -e /s/ls4/users/slava1195/rl_rob/RL_robotSim/Logs/%x_%j.err
+#SBATCH -J testppoPaper
+#SBATCH -D /s/ls4/users/slava1195/rl_rob_2/RL_robotSim
+#SBATCH -o /s/ls4/users/slava1195/rl_rob_2/RL_robotSim/Logs/%x_%j.out
+#SBATCH -e /s/ls4/users/slava1195/rl_rob_2/RL_robotSim/Logs/%x_%j.err
 #SBATCH -p hpc5-el7-gpu-3d
-#SBATCH -n 2
-#SBATCH --gres=gpu:k80:1
+#SBATCH -n 4
+#SBATCH --gres=gpu:k80:2
 #SBATCH --time=48:00:00
 
 export HOME=/s/ls4/users/slava1195
 export PATH=$HOME/anaconda3/envs/rl_robots/bin:$PATH
 
 export LD_LIBRARY_PATH=/s/ls4/sw/cuda/10.1/lib64:/s/ls4/sw/cuda/10.1/nvvm/lib64:$HOME/installation_dists/cudnn-9.0-linux-x64-v7.1.ga/lib64:
-#RUN_DIR=/s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/env4/PPO/env4feats12_train/ppo_env4feats12_train5v2/PPO_continuous-grid_448ca_00001_1_2022-06-14_16-10-15
-#RUN_DIR=/s/ls4/users/grartem/RL_robots/RL_robotSim/results/FollowerContinuous/env4/PPO/env4feats12_train/ppo_env4feats12_train5v6/PPO_continuous-grid_448ca_00002_2_2022-06-14_16-10-32
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env8/PPO/feats_v12_train/ppo_env8feats_v12_train5v7/PPO_continuous-grid_52abf_00000_0_2022-11-17_16-54-15
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env8v2/PPO/feats_v12_train/ppo_env8v2feats_v12_train5v7/PPO_continuous-grid_509a3_00000_0_2022-11-18_18-18-54
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env8v2/PPO/feats_v12_train/ppo_env8v2feats_v12_v1_train5v7/PPO_continuous-grid_50c30_00000_0_2022-11-20_00-58-35
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v1feats_v12_train5v7/PPO_continuous-grid_acd96_00000_0_2022-11-22_16-50-50
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v2feats_v12_train5v7/PPO_continuous-grid_7f349_00000_0_2022-11-23_23-07-46
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v3feats_v12_train5v7/PPO_continuous-grid_7f349_00001_1_2022-11-23_23-08-28
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v1_d1_feats_v12_train5v7/PPO_continuous-grid_b539a_00000_0_2022-11-28_12-04-47
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v1_d2_feats_v12_train5v7/PPO_continuous-grid_21183_00000_0_2022-11-30_19-57-53
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v2feats_v12_train5v7/PPO_continuous-grid_7f349_00000_0_2022-11-23_23-07-46
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env9/PPO/feats_v12_train/ppo_env9v5_feats_v12_train5v7/PPO_continuous-grid_57f05_00000_0_2022-12-01_18-10-51
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env10/PPO/feats_v12_train/ppo_env10v1feats_v12_train5v2_use_lstm/PPO_continuous-grid_57f05_00001_1_2022-12-01_18-11-18
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env13/PPO/feats_v12_train/ppo_env13v1feats_v12_train5v7/PPO_continuous-grid_314b2_00001_1_2022-12-04_18-20-49
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env13/PPO/feats_v12_train/ppo_env13v1_feats_v12_train5v7/PPO_continuous-grid_314b2_00001_1_2022-12-04_18-20-49
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env13/PPO/feats_v12_train/ppo_env13v1_feats_v12_feat_v1_train5v7/PPO_continuous-grid_f286a_00001_1_2022-12-05_13-24-26
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env14/PPO/feats_v12_train_feats_v1/ppo_env14v1_feats_v12_feats_v1_train5v7/PPO_continuous-grid_4d6da_00001_1_2022-12-06_20-35-14
-################ после косяков
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v2_feats_v12_train5v7/PPO_continuous-grid_a2f58_00001_1_2022-12-08_16-24-44
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env14/PPO/feats_v12_train/ppo_env14v1_feats_v12_train5v7/PPO_continuous-grid_4d6da_00000_0_2022-12-06_20-34-57
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v1_feats_v12_train5v7/PPO_continuous-grid_a2f58_00000_0_2022-12-08_16-24-26
-
-# env 16
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v2_feats_v12_train5v7/PPO_continuous-grid_a2f58_00001_1_2022-12-08_16-24-44
-
-# env 17
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env17/PPO/feats_v13_train/ppo_env17v2_feats_v13_train5v7/PPO_continuous-grid_b2709_00001_1_2022-12-09_14-07-59
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env17/PPO/feats_v13_train/ppo_env17v1_feats_v13_train5v7/PPO_continuous-grid_b2709_00000_0_2022-12-09_14-07-40
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env17/PPO/feats_v13_train/ppo_env17v2_feats_v13_train5v7/PPO_continuous-grid_b2709_00001_1_2022-12-09_14-07-59
-
-# env 16 v1
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v1_feats_v12_train5v7/PPO_continuous-grid_a2f58_00000_0_2022-12-08_16-24-26
-
-# ENV 16v2
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v2_feats_v12_train5v7/PPO_continuous-grid_a2f58_00001_1_2022-12-08_16-24-44
-
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env16/PPO/feats_v12_train/ppo_env16v2_feats_v12_feats_v1_train5v7/PPO_continuous-grid_a2f58_00002_2_2022-12-08_16-25-01
-
-# env 17V1_70
-
-## env 19v1 35
-#RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env19/PPO/feats_v12_train_35/ppo_env19v1_feats_v12_train5v7/PPO_continuous-grid_45046_00000_0_2022-12-15_16-34-59
-
-# env 24_new ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1
-RUN_DIR=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous/env24_new/PPO_sv2/feats_v12_train_35/ppo_sv2_env24v1_1_feats_v16_fi_v5v8_sqd_arch_arch_d_v1/PPO_continuous-grid_712b9_00000_0_2023-03-17_15-44-22
 
 
 
-python TestModel.py --rlalgo PPO \
---run_dir $RUN_DIR \
---checkpoint_number 495
+RUN_DIR_1=/s/ls4/users/slava1195/rl_rob_2/RL_robotSim/results/FollowerContinuous_test_sensors/env29/PPO/default_model/feats_v14VPC/bear2/ppo_e29_b1_f14VPC_mv4/PPO_continuous-grid_fded9_00000_0_2023-06-24_16-35-32
 
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 340
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 140
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 200
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 220
-#№№№
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 70
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 310
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 300
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 220
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 320
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 210
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 260
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 120
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 280
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 330
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 170
-#
-#python TestModel.py --rlalgo PPO \
-#--run_dir $RUN_DIR \
-#--checkpoint_number 110
+
+
+RUN_DIR_2=/s/ls4/users/slava1195/rl_rob_2/RL_robotSim/results/FollowerContinuous_test_sensors/env29/PPO/default_model/feats_v14VPC/bear2/ppo_e29_b2_2_f14VPC_ar/PPO_continuous-grid_fded9_00001_1_2023-06-24_16-35-51
+
+
+
+RUN_DIR_3=/s/ls4/users/slava1195/rl_rob_2/RL_robotSim/results/FollowerContinuous_test_sensors/env29/PPO/default_model/feats_v14VPC/bear2/ppo_e29_b2_f14VPC_mv4/PPO_continuous-grid_fded9_00002_2_2023-06-24_16-36-10
+
+
+# RUN_DIR_4=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous_paper/env29/PPO/default_model/feats_v14/bear1/ppo_e29_b1_f14_ar/PPO_continuous-grid_9549b_00000_0_2023-06-20_12-05-20
+
+# RUN_DIR_5=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous_paper/env29/PPO/default_model/feats_v14/bear1/ppo_e29_b1_f14_mv4/PPO_continuous-grid_9549b_00001_1_2023-06-20_12-05-49
+
+# RUN_DIR_6=/s/ls4/users/slava1195/rl_rob/RL_robotSim/results/FollowerContinuous_paper/env29/PPO/default_model/feats_v14/bear2/ppo_e29_b2_f14_ar/PPO_continuous-grid_9549b_00002_2_2023-06-20_12-06-15
+
+
+
+# feats14v2 bear 1 mv4
+python TestModel_2.py --rlalgo PPO \
+--run_dir $RUN_DIR_1 \
+--checkpoint_number 130
+
+
+
+# feats12v2 1 bear ar
+python TestModel_2.py --rlalgo PPO \
+--run_dir $RUN_DIR_2 \
+--checkpoint_number 95
+
+python TestModel_2.py --rlalgo PPO \
+--run_dir $RUN_DIR_2 \
+--checkpoint_number 135
+
+python TestModel_2.py --rlalgo PPO \
+--run_dir $RUN_DIR_2 \
+--checkpoint_number 115
+
+
+
+# feats12v2 1 bear mv4
+python TestModel_2.py --rlalgo PPO \
+--run_dir $RUN_DIR_3 \
+--checkpoint_number 130
+
+python TestModel_2.py --rlalgo PPO \
+--run_dir $RUN_DIR_3 \
+--checkpoint_number 175
+
+# # feats14 1 bear ar
+# python TestModel_2.py --rlalgo PPO \
+# --run_dir $RUN_DIR_4 \
+# --checkpoint_number 160
+
+# # feats14 1 bear mv4
+# python TestModel_2.py --rlalgo PPO \
+# --run_dir $RUN_DIR_5 \
+# --checkpoint_number 155
+
+# # feats14 2 bear ar
+# python TestModel_2.py --rlalgo PPO \
+# --run_dir $RUN_DIR_6 \
+# --checkpoint_number 155
+
+# python TestModel_2.py --rlalgo PPO \
+# --run_dir $RUN_DIR_6 \
+# --checkpoint_number 210
