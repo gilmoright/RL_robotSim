@@ -326,9 +326,9 @@ class BiLSTMModelPrevV2(TFModelV2):
         x = self.inputs
 
         # x = tf.keras.layers.Flatten(data_format="channels_first")(x)
-        x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(256, recurrent_dropout=0.1))(x)
-        x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(256, recurrent_dropout=0.1))(x)
-        x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(128, recurrent_dropout=0.1))(x)
+        x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(256, return_sequences=True, recurrent_dropout=0.1))(x)
+        x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(256, return_sequences=True, recurrent_dropout=0.1))(x)
+        x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(128, return_sequences=True, recurrent_dropout=0.1))(x)
         x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(128, return_sequences=False))(x)
 
 
