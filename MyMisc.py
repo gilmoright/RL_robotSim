@@ -153,7 +153,9 @@ def continuous_env_maker(config):
     env = gym.make(name, **config["base_env_config"])
     assert not (ContinuousObserveModifier_v0 in config["wrappers"] and LeaderTrajectory_v0 in config["wrappers"])
     if 'ContinuousObserveModifier_v0' in config["wrappers"]:
-        env = ContinuousObserveModifier_v0(env, action_values_range)
+        env = ContinuousObserveModifier_v0(env, action_values_range,
+         use_prev_obs=config.get("use_prev_obs", None),
+         max_prev_obs=config.get("max_prev_obs", 0))
     if 'ContinuousObserveModifier_lidarMap2d' in config["wrappers"]:
         env = ContinuousObserveModifier_lidarMap2d(env, action_values_range, 
             map_wrapper_forgetting_rate=config.get("map_wrapper_forgetting_rate", None), 
