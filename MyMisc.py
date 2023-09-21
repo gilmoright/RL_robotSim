@@ -7,10 +7,10 @@ sys.path.append("/s/ls4/users/grartem/RL_robots/continuous_grid_arctic/")
 #sys.path.append("/s/ls4/users/slava1195/rl_rob/continuous-grid-arctic")
 try:
     import continuous_grid_arctic.follow_the_leader_continuous_env
-    from continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_lidarMap2d, ContinuousObserveModifier_lidarMap2d_v2, LeaderTrajectory_v0, ContinuousObserveModifier_sensorPrev
+    from continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_lidarMap2d, ContinuousObserveModifier_lidarMap2d_v2, LeaderTrajectory_v0, ContinuousObserveModifier_sensorPrev, SkipBadSeeds
 except:
     import src.continuous_grid_arctic.follow_the_leader_continuous_env
-    from src.continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_lidarMap2d, ContinuousObserveModifier_lidarMap2d_v2, LeaderTrajectory_v0, ContinuousObserveModifier_sensorPrev
+    from src.continuous_grid_arctic.utils.wrappers import MyFrameStack, ContinuousObserveModifier_v0, ContinuousObserveModifier_lidarMap2d, ContinuousObserveModifier_lidarMap2d_v2, LeaderTrajectory_v0, ContinuousObserveModifier_sensorPrev, SkipBadSeeds
 
 
 import gym
@@ -173,7 +173,8 @@ def continuous_env_maker(config):
         env = LeaderTrajectory_v0(env, framestack, config.get('radar_sectors_number', 180))
     if 'MyFrameStack' in config['wrappers']:
         env = MyFrameStack(env, framestack)
-    
+    if "SkipBadSeeds" in config["wrappers"]:
+        env = SkipBadSeeds(env)        
     return env
 
 register_env("continuous-grid", continuous_env_maker)
